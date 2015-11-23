@@ -16,7 +16,7 @@ rename:
 	mv $(MainFile).pdf $(Target)
 
 available:
-	mv generated_files/* .
+	mv Generated_Files/* .
 
 clean:
-	mv *.log *.aux *.xml *.bcf *.toc *.blg *.bbl generated_files/
+	mv *.log *.aux *.xml *.bcf *.toc *.blg *.bbl Generated_Files/
