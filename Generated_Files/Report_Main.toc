@@ -1,59 +1,28 @@
-\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1}Introduction}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1}The Standard Model of Particle Physics}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2}The LHCb Experiment}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.2.1}The Detector}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.2.2}Physics Studied at LHCb}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.2.3}VELO Upgrade}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.3}FPGAs in Particle Detectors}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.3.1}Field Programable Gate Arrays}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.3.2}The Role of FPGA's in the VELO Upgrade}{1}
-\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2}Scrambling Algorithms}{2}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1}The Role of Scrambling Data in the VELO}{2}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2}Additive and Multiplicative Scramblers}{2}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3}The Different Options for Scrambleing Algorithms}{2}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4}Algorithm Analysis}{2}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.4.1}Messurements of the Algorithms}{2}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.4.2}Results of Analysis}{2}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.5}Conclusion}{2}
-\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}Event Isolation Flagging}{3}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1}Motivation}{3}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2}Time Sorting Data}{3}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3}Bubble Sorting}{3}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.4}Isotation Checking}{3}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.5}Conclusion}{3}
-\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4}Future Development}{4}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1}LHCb 2020 Upgrade}{4}
-\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2}Further Development of FPGA's in the VELO}{4}
-\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5}Conclusion}{5}
-\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6}Acknoledgments}{5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{References}{6}
