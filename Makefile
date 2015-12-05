@@ -6,9 +6,9 @@ all: $(MainFile).tex
 	make pdf	
 
 pdf: $(MainFile).tex
-	pdflatex $(MainFile).tex
+	pdflatex $(MainFile).tex 
 	biber $(MainFile)
-	pdflatex $(MainFile).tex
+	pdflatex $(MainFile).tex 
 	make rename
 	make clean
 
