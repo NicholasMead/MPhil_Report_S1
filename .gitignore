@@ -3,3 +3,7 @@ Generated_Files
 
 #files
 *~
+*.db
+*.sty
+*.def
+*.toc	
