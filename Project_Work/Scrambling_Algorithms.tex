@@ -34,6 +34,7 @@
 		\end{description}
 
 	\subsection{Scrambler Options}
+	\label{sub:scrambler_options}
 
 		Three scrambling algorithums have been concidered:
 
@@ -57,12 +58,35 @@
 				The VeloPix Scrambler differse from the Intermediate scrambler as it aims to more effeciently scramble the data.
 		\end{description}
 
-
-
 	\subsection{Algorithm Analysis}
 
-	\subsubsection{Messurements of the Algorithms}
+		Intuitively, one can assume that fully scrambled data will be indistinguisable from randomly generated data. 
+		For this reason, the three algorithm are not only tested against eachother and the pre-scrambled data but also randomly generated binary.
+		The randomly generated data was created using the Python \textit{`random'} library, selecting a \textit{`0'} or \textit{`1'} with probubility $1/2$ each.
+		While the Python \textit{`random'} library is only sudo-random, on the scale of this example (i.e. $>$ 100,000 frames), this is by far sufficient.
+		\par
+		More mathematicaly rigorus, however, is to evaluade the system abstractly in the framework of statistical physics.
+		In this abstraction, the ensemble is the 120 bit frame (with the header and parity removed); 
+		microstates are the particular form of the frames;
+		and macroscopic quantities can be calculated by averaging a large number of frames (i.e. the desync data).
+		For the analysis outlined in section \ref{subsub:messurements_of_the_algorithms}, prediction will be made using these principles and outlined in section \ref{subsub:statistical_predictions}.
 
-	\subsubsection{Results of Analysis}
+		\subsubsection{Messurements of the Algorithms} 
+		\label{subsub:messurements_of_the_algorithms}
+
+			To compare the effecincy of the three algorithums in section \ref{sub:scrambler_options}, the algorithums where run over the same unput data and compared for the following measures:
+
+			\begin{description}
+				\item[Number of Transitions Per Frame] \hfill \\
+
+				\item[Common Bit Chain Length] \hfill \\
+
+				\item[Total Bit Frequancy] \hfill \\
+			\end{description}
+
+		\subsubsection{Statistical Predictions} % (fold)
+		\label{subsub:statistical_predictions}
+
+		\subsubsection{Results of Analysis}
 
 	\subsection{Conclusion}
