@@ -76,6 +76,7 @@
 
 		\begin{equation}
 			S \sim ln(\Omega)
+			\label{eqn:boltzman}
 		\end{equation}
 
 		where $\Omega$ is the number of microstates assosiated with the macrostate, we learn that this state of maximum entropy is a macrostate with the maximum number of assosiated microstates.
@@ -124,7 +125,7 @@
 					At each time itteration,
 
 					\begin{equation}
-						p_{i \to j}(t) = p_{i \to i}(t) = 0.5 \quad : \quad i,j = [0 \ 1], \quad \forall\ t \in \mathbb{N}
+						p_{i \to j}(t) = p_{i \to i}(t) = 0.5 \quad : \quad i,j = [0\ 1], \quad \forall\ t \in \mathbb{N}
 					\end{equation}
 
 					However, as $p_{1 \to 0}(t)$ is equal in both probalility and importance to $p_{0 \to 1}(t)$, the probability of a bit change shall herefore be refered to as $p_{t}(t)$.
@@ -139,21 +140,50 @@
 
 					\begin{equation}
 						f_{t}(N_{t}) = \frac{n!}{N_{t}!(n-N_{t})!}\ (p_{t})^{n}
+						\label{eqn:transition_propability_dencity}
 					\end{equation}
 
 					For $n = 120$, we can calulate,
 
 					\begin{equation}
-						<N_{t}> \ = \sum_{N_{t}=0}^{n-1} N_{t}\ f(N_{t}) = n\ p_{t} = 60
-						\label{eqn:tansition-expectation}
+						<N_t>^{Binomial} \ = \sum_{N_{t}=0}^{n-1} N_{t}\ f(N_{t}) = n\ p_{t} = 60
+						\label{eqn:tansition_expectation}
 					\end{equation}
 
 					\begin{equation}
-						\sigma_{N_{t}} = \sqrt{ n\ p_{t}^2} = 5.48
+						\sigma_{N_t}^{Binomial} = \sqrt{ n\ p_{t}^2} = 5.48
 					\end{equation}
 
+					Furthermore, when concidering the entropic argument in section \ref{sub:scrambler_options} equation \ref{eqn:boltzman}, the number of microstates corespoding to each macrostate $N_t$ can be related to equation \ref{eqn:transition_propability_dencity},
+
+					\begin{equation}
+						\Omega_t \sim \frac{n!}{N_{t}!(n-N_{t})!}
+					\end{equation}
+
+					\begin{equation}
+						<N_t>^{Entropic} = MAX[S_t] = MAX[\Omega_t]
+					\end{equation}
+
+					This can be numerically solved,
+
+					\begin{equation}
+						<N_t>^{Entropic}\ = 60
+					\end{equation}
 				\item[Common Bit Chain Length] \hfill \\
 					
+					The probability of a chain of legth $n$ is,
+
+					\begin{equation}
+						p_n = (1 - p_t)^n
+					\end{equation}
+
+					As $p_t = 0.5$,
+
+					\begin{equation}
+						p_n = (p_t)^n
+					\end{equation}
+
+
 
 				\item[Total Bit Frequancy] \hfill \\
 					
