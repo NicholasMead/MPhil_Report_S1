@@ -58,7 +58,17 @@
 				The VeloPix Scrambler differse from the Intermediate scrambler as it aims to more effeciently scramble the data.
 		\end{description}
 
+
+	\subsection{Cross Checks} % (fold)
+	\label{sub:cross_checks}
+	
+		Ofcourse, the main priority when scrambling data is ensuring that the data in recoverable.
+		For all three scramblers, the algorithum was sysnthesised in Quartus\supercite{ref:quartus} and simulated in Modelsim\supercite{ref:modelsim}.
+
+	% subsection cross_checks (end)
+
 	\subsection{Algorithm Analysis}
+	\label{sub:algorithm_analysis}
 
 		Intuitively, one can assume that fully scrambled data will be indistinguisable from randomly generated data. 
 		For this reason, the three algorithm are not only tested against eachother and the pre-scrambled data but also randomly generated binary.
@@ -154,7 +164,7 @@
 						\sigma_{N_t}^{Binomial} = \sqrt{ n\ p_{t}^2} = 5.48
 					\end{equation}
 
-					Furthermore, when concidering the entropic argument in section \ref{sub:scrambler_options} equation \ref{eqn:boltzman}, the number of microstates corespoding to each macrostate $N_t$ can be related to equation \ref{eqn:transition_propability_dencity},
+					Furthermore, when concidering the entropic argument in section \ref{sub:algorithm_analysis} equation \ref{eqn:boltzman}, the number of microstates corespoding to each macrostate $N_t$ can be related to equation \ref{eqn:transition_propability_dencity},
 
 					\begin{equation}
 						\Omega_t \sim \frac{n!}{N_{t}!(n-N_{t})!}
@@ -168,29 +178,55 @@
 
 					\begin{equation}
 						<N_t>^{Entropic}\ = 60
+						\label{eqn:n_t_entropic}
 					\end{equation}
+
+					While the result of equation \ref{eqn:n_t_entropic} does not contibute anything new, it is important as a \textit{`sanity check'}.
+					Because the system can be described as in section \ref{sub:algorithm_analysis}, it would indicated a problem in the theoretical framework if the result did not match.
+
+
 				\item[Common Bit Chain Length] \hfill \\
 					
 					The probability of a chain of legth $n$ is,
 
 					\begin{equation}
-						p_n = (1 - p_t)^n
+						p_n = p_1(1 - p_t)^n, \quad : \quad n \in \mathbb{N}, \quad n > 1
 					\end{equation}
 
-					As $p_t = 0.5$,
+					where $p_1$ is the number of chains of lenght 1. 
+					As $p_1 = N_0 (1 -p_t)$, where $N$ is the total number of chains,
 
 					\begin{equation}
-						p_n = (p_t)^n
+						\frac{N_n}{N_0} = (1 - p_t)^n. \quad : \quad n \in \mathbb{N}, \quad n > 1
 					\end{equation}
 
-					Therefore, the proportion of chains of length 
+					Takeing the log of both sides,
 
 					\begin{equation}
-						add some eqn here \quad what about this?
+						log\bigg(\frac{N_n}{N_0}\bigg) = n\ log(1 - p_t).
+					\end{equation}
+
+					Therefor, for a graph of $log(count)$ against $n$ for a large sample of data, the gradient would be $log(1 - p_t)$.
+					In this case, as $p_t = 0.5$, 
+
+					\begin{equation}
+						log(1 - p_t) = -0.30\ .
+						\label{eqn:log_chain_length_gradient}			
 					\end{equation}
 
 				\item[Total Bit Frequancy] \hfill \\
 					
+					$A$, the assymetry of \textit{`1'}s and \textit{`0'}s is defined as,
+
+					\begin{equation}
+						A = N_1 - N_0,
+						\label{eqn:a_def}
+					\end{equation}
+
+					where $N_1$ and $N_0$ are the number of \textit{`1'}s and \textit{`0'}s respectively.
+
+
+
 			\end{description}	
 
 		\subsubsection{Results of Analysis}

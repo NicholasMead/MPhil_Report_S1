@@ -12,11 +12,10 @@
 \date{\today}
 
 % ----- Packages ----- %
-\usepackage[left=1in,right=1in,bottom=1.25in]{geometry}
+\usepackage[left=1in,right=1in,bottom=1.25in,top=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \graphicspath{{Figures/}}
-\usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{enumerate}
 \usepackage[ampersand]{easylist}
@@ -42,28 +41,26 @@
 
 		\newpage
 		\thispagestyle{empty}	
-		\tableofcontents
+		\scriptsize\tableofcontents
 		\thispagestyle{empty}	
 	
 	\end{titlepage}
 
-	% ----- Main Document ----- %
-
+	% ----- Line Numbers for ease when writing ----- %
+	% (comment out or remove for final draft) %
 	\linenumbers
 	\modulolinenumbers[2]
 
+	% ----- Main Document ----- %
+
 	\input{Overview/Introduction}
 
-	\newpage
 	\input{Project_Work/Scrambling_Algorithms}
 
-	\newpage
 	\input{Project_Work/Event_Isolation_Flaging}
 
-	\newpage
 	\input{Overview/Future_Development}
 
-	\newpage
 	\input{Other/Conclusion}
 
 	% ----- Acknowledgements & Bibliography ----- %
