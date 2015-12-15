@@ -62,8 +62,16 @@
 	\subsection{Cross Checks} % (fold)
 	\label{sub:cross_checks}
 	
-		Ofcourse, the main priority when scrambling data is ensuring that the data in recoverable.
+		Ofcourse, the main prioritys when scrambling data is ensuring that the data in recoverable.
 		For all three scramblers, the algorithum was sysnthesised in Quartus\supercite{ref:quartus} and simulated in Modelsim\supercite{ref:modelsim}.
+		The aim of sysnthesising and simulating the scramblers in these programs was to ensure that the design was physical in term of on-board logic gates, and to check that the scrambled  data was recoverable.
+
+		Furthermore, a C++ simulation was created for the three scramblers.
+		This simulated had two purposes:
+		firstly the output of the C++ can checked against the Modelsim simulated cehck consistancy;
+		secondly to simulate the scrambler over a much larger simple of data as Modelsim simulations are less time effecient.
+		In attition to the cross checks, the C++ code allowed for the descrambling to be delayed by several frames. The aim of this was to simulate a desycronisation event.
+		As expected, the additive scarmbler was unable to recover any data, however the intermediate and VeloPix scarmblers both recovered the \textit{`key'} after two frames and start descrambling data.
 
 	% subsection cross_checks (end)
 
@@ -106,8 +114,8 @@
 					One of the downfalls of the `Number of Transitions Per Frame' analysis is that the two 20 bit frames,
 
 					\begin{enumerate}[a)]
-						\item 10101010101111111111
-						\item 10011001100110011001
+						\item \textsc{10101010101111111111}
+						\item \textsc{10011001100110011001}
 					\end{enumerate}
 
 					both with 10 transitions, will be concidered equal. However, (b) is clearly a more suitable output for data transfer as (a) has a large probability of desyncronisated due to the long chains of \textit{`1'}s.
@@ -224,11 +232,89 @@
 					\end{equation}
 
 					where $N_1$ and $N_0$ are the number of \textit{`1'}s and \textit{`0'}s respectively.
+					We can concider the evolution of $A$ with frame $t$ of size $n$ as a stockastic itterative map with zero deterministic growth \supercite{ref:stockastic_physics},
 
+					\begin{equation}
+						A(nt + \Delta t) = A(nt) + \mathcal{N}(nt)
+					\end{equation}
 
+					Where $\Delta t = \Delta frame \times n$ and $\mathcal{N}$ is an independant random variable picked from a gausian distribution. While $A(t) \in \mathbb{Z}$, in the limit of large $nt$ we can approximate that $A$ is continious. 
+					\par
+					If we concider the moments of $A$,
+
+					\begin{align}
+						\label{eqn:A_moment1}
+						<A(t = M\ \Delta t)> & = \sum_{m = 0}^{M -1}  \mathcal{N}(m\ n\ \Delta t), \\
+						\label{eqn:A_moment2}
+						<A(t = M\ \Delta t)^2> & = \sum_{m=0}^{M-1} \sum_{m'=0}^{M-1}  \mathcal{N}(m\ n\ \Delta t) \mathcal{N}(m'\ n\ \Delta t)\ \delta_{mm'} \nonumber \\
+						&= \sum_{m=0}^{M-1} < \mathcal{N}(m\ n\ \Delta t)^2 >.
+					\end{align}
+
+					Clearly, in Equation \ref{eqn:A_moment1}, $<A> = 0$. In Equation \ref{eqn:A_moment2}, we assume the variance is of form $(\Delta t)^\alpha$ \cite{ref:stockastic_physics}. Then,
+
+					\begin{equation}
+						<A(t = M\ \Delta t)^2>\ = M (\Delta t)^\alpha.
+						\label{eqn:A_moment3}
+					\end{equation}
+
+					Running the analysis over the frames $t = 0$ to $t_f$, the number of bits sampled is $M = {t_f / \Delta t}$. Substituting this into Equation \ref{eqn:A_moment3},
+
+					\begin{equation}
+						<A(t = M\ \Delta t)^2>\ = t_f\ (\Delta t)^{\alpha -1}.
+					\end{equation}
+
+					Concidering the three cases of $\alpha$:
+
+					\begin{easylist}[itemize]
+						% \ListProperties{Margin=2cm,Align=fixed,FinalSpace=2em}
+						& $\bm{\alpha > 1}$: Here $A \to 0$ as $\Delta t \to 0$.
+						& $\bm{\alpha < 1}$: Here $A \to \infty$ as $\Delta t \to 0$.
+						& $\bm{\alpha = 1}$: This is the only sensible choice.
+					\end{easylist}
+
+					With $\alpha =1$,
+
+					\begin{equation}
+						<A(t = M\ \Delta t)^2> = M (\Delta t).
+					\end{equation}
+
+					And thus,
+
+					\begin{equation}
+						\sigma_{A} = \sqrt{<A^2> - <A>^2} = \sqrt{<A^2>} = \sqrt{\Delta t}.
+					\end{equation}
 
 			\end{description}	
 
 		\subsubsection{Results of Analysis}
+			\begin{figure}[h]
+				\includegraphics[width=1\textwidth]{Transition_Histogram_update}
+				\caption{The results of the \textit{`Number of Transitions Per Frame'} analysis. The histogram and fit for the Random Data, Intermediate Scrambler and VeloPix Scrambler approximatly overlap.}
+				\label{fig:transitions_per_frame}
+			\end{figure}
+			
+			Figure~\ref{fig:transitions_per_frame} shows histograms of the number of transition per frame, as outlined in Section~\ref{subsub:messurements_of_the_algorithms}. The qualitative results of this analysis are shown in Table~\ref{tab:transitions_per_frame}.
+			\begin{table}[h]
+				\centering
+				\begin{tabular}{|r|cc|}
+					\hline								 & Mean & $\sigma$ 	\\ \hhline{|=|==|}
+					Unscrambled Data       & 54   & 6.63     	\\ \hhline{|=|==|}
+					Additive Scrambler     & 60   & 7.35     	\\
+					Intermediate Scrambler & 60   & 5.45     	\\
+					VeloPix Scrambler      & 50   & 5.46     	\\ \hhline{|=|=:=|}
+					Random Data            & 60   & 5.45     	\\
+					Theoretical Prediction & 60   & 5.48    	\\ \hline
+				\end{tabular}
+				\caption{The results of the \textit{`Number of Transitions Per Frame'} analysis.}
+				\label{tab:transitions_per_frame}
+			\end{table}
 
 	\subsection{Conclusion}
+
+
+
+
+
+
+
+
