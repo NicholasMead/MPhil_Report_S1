@@ -4,9 +4,9 @@ Target = MPhys_Semester1_Report.pdf
 all: $(MainFile).tex
 	make available; make pdf; make clean; make rename
 
-pdf: $(MainFile).tex
-	pdflatex $(MainFile).tex 
-	biber $(MainFile)
+pdf:
+	pdflatex $(MainFile).tex;\ 
+	biber $(MainFile);\ 
 	pdflatex $(MainFile).tex
 
 rename:
