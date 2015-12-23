@@ -19,8 +19,9 @@ looks for manual or how the companies want to be cited.
 ** DONE Get the template                                                        
 ** TODO Write Introduction [1/5]                                                
 *** DONE Sandard Model
-*** TODO LHCb Experiment
-*** TODO LHCb VELO upgrade                                                      
+*** DONE LHCb Experiment
+*** TODO LHCb upgrade
+*** TODO VELO upgrade                                                      
 *** TODO DAQ chain (VeloPix - OPB - PCIe40)                                     
 *** TODO MiniDAQ description                                                    
 ** TODO Write Scrambler section [3/6]                                           
