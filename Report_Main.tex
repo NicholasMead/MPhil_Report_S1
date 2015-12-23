@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,oneside]{article}
+\documentclass[a4paper,12pt,twoside]{article}
 
 % ----- Header ----- %
 \title{FPGA Development for the LHCb Vertex Locator Upgrade}
@@ -54,11 +54,10 @@
 		\maketitle \thispagestyle{empty}
 		\vspace{1em}
 		\input{Other/Abstract}
-		
-		\clearpage\null\newpage
-		\newpage
-		\thispagestyle{empty}	
-		\tableofcontents
+
+		\newpage \thispagestyle{empty}
+		\cleardoublepage  
+		\tableofcontents 
 		\thispagestyle{empty}	
 	
 	\end{titlepage}
@@ -69,6 +68,8 @@
 	\modulolinenumbers[2]
 
 	% ----- Main Document ----- %
+
+	\setcounter{page}{1}
 
 	%\input{Overview/Introduction}
 
