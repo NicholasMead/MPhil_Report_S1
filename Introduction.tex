@@ -99,12 +99,24 @@
       \par
       The VELO modules will operate in the LHC secondary vacuum.
       It is seperated from the primary vacuum by RF foil that is 3.5mm from the beamline, at the closest point \cite{velo_design_report}.
-      The foil is made of 250 $\mu m$ thick aluminum, it is required to be of this thickness to reduce the interacts with the collision decay products.
-
-      \subsubsection{The Role of FPGAs in the VELO Upgrade}
-
-      \underline{F}ield \underline{P}rogramable \underline{G}ate \underline{A}rrays (FPGAs) are extencively used in new technology due to there fast data transfer rates and revitility \cite{fpga}.
+      The foil is made of 250 $\mu m$ thick aluminum, it is required to be of this thickness to reduce the interacts with the collision decay products. 
 
       \subsubsection{Data Flow and Low Level Interface}   
 
-      The data from each SP is packaged in a 30 bit \underline{S}uper \underline{P}ixel \underline{P}acket (SPP). The SPP is comprised of  a (form most to least significant bits) 9 bit \underline{B}unch \underline{C}ross \underline{ID} (BCID); 13 bit SPP location information (horizontal and vertical coordinates); 8 bit SP hitmat.    
+      \underline{F}ield \underline{P}rogramable \underline{G}ate \underline{A}rrays (FPGAs) are extencively used in new technology due to there fast data transfer rates and revitility \cite{fpga}. 
+      FPGAs are used in the \underline{D}ata \underline{Aq}uisition (DAQ) modules for speed and paralell procesing capabilities.
+      The DAQ, in its simplest form, is a series of optical links, a data processing FPGA and a PCIe port for data transfer to the VELO computer system.
+      \par
+      The data from each SP is packaged in a 30 bit \underline{S}uper \underline{P}ixel \underline{P}acket (SPP). The SPP is comprised of  a (form most to least significant bits) 9 bit \underline{B}unch \underline{C}ross \underline{ID} (BCID); 13 bit SPP location information (horizontal and vertical coordinates); 8 bit SP hitmat.
+      \par
+      A GWT serialiser forms a 128 bit \textit{`frame'} comprising of a header (1010), four single bit parity flags and four SPPs.
+      The parity flags indicate the parity of the four SPPs as a validation check for downstream processes.
+      The data then is transmitted via an electrical to optical converter though optical fibers to the DAQ.
+      \par
+      In the DAQ is the \underline{L}ow \underline{L}evel \underline{I}nterface (LLI).
+      The LLI is responcible for sorting the incomming data into time order and packaging the data in the correct form computer systems to optimise output bandwidth.
+      Other processes included in the LLI are, descrabling and event isolation tagging.
+      These processes will be discussed in more detail later in this document.
+
+
+
