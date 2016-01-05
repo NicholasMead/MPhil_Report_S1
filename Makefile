@@ -5,8 +5,8 @@ all: $(MainFile).tex
 	make available; make pdf; make clean; make rename
 
 pdf:
-	pdflatex $(MainFile).tex;\ 
-	biber $(MainFile);\ 
+	pdflatex $(MainFile).tex
+	biber $(MainFile)
 	pdflatex $(MainFile).tex
 
 rename:
