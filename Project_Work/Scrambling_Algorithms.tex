@@ -145,46 +145,46 @@
 						p_{i \to j}(t) = 0.5 \quad : \quad i,j = [0\ 1], \quad \forall\ t \in \mathbb{N}.
 					\end{equation}
 
-					However, assuming zero bias and detailed balance, as $p_{1 \to 0}(t)$ is equal in both probalility and importance to $p_{0 \to 1}(t)$, the probability of a bit change shall herefore be refered to as $p_{t}(t)$.
+					However, assuming zero bias and detailed balance, as $p_{1 \to 0}(t)$ is equal in both probalility and importance to $p_{0 \to 1}(t)$, the probability of a bit change shall herefore be refered to as $p_{\tau}(t)$.
 					\par
-					Over a $n$ step process, analogous to a $n$ bit frame, the probalility distribution of the number of transitions $N_t$ is given by Binomial statistics,
+					Over a $n$ step process, analogous to a $n$ bit frame, the probalility distribution of the number of transitions $N_\tau$ is given by Binomial statistics,
 
 					\begin{equation}
-						f(N_{t}) = \frac{n!}{N_{t}!(n-N_{t})!}\ p^{N_{t}}\ (1 - p)^{n-N_{t}}
+						f(N_{\tau}) = \frac{n!}{N_{\tau}!(n-N_{\tau})!}\ p^{N_{\tau}}\ (1 - p)^{n-N_{\tau}}
 					\end{equation}
 
-					Simplified for the special case $p = p_{t} = 0.5$,
+					Simplified for the special case $p = p_{\tau} = 0.5$,
 
 					\begin{equation}
-						f_{t}(N_{t}) = \frac{n!}{N_{t}!(n-N_{t})!}\ (p_{t})^{n}
+						f_{\tau}(N_{\tau}) = \frac{n!}{N_{\tau}!(n-N_{\tau})!}\ (p_{\tau})^{n}
 						\label{eqn:transition_propability_dencity}
 					\end{equation}
 
 					For $n = 120$, we can calulate,
 
 					\begin{equation}
-						<N_t>^{Binomial} \ = \sum_{N_{t}=0}^{n-1} N_{t}\ f(N_{t}) = n\ p_{t} = 60
+						<N_\tau>^{Binomial} \ = \sum_{N_{\tau}=0}^{n-1} N_{\tau}\ f(N_{\tau}) = n\ p_{\tau} = 60
 						\label{eqn:tansition_expectation}
 					\end{equation}
 
 					\begin{equation}
-						\sigma_{N_t}^{Binomial} = \sqrt{ n\ p_{t}^2} = 5.48
+						\sigma_{N_\tau}^{Binomial} = \sqrt{ n\ p_{\tau}^2} = 5.48
 					\end{equation}
 
-					Furthermore, when concidering the entropic argument in section \ref{sub:algorithm_analysis} equation \ref{eqn:boltzman}, the number of microstates corespoding to each macrostate $N_t$ can be related to equation \ref{eqn:transition_propability_dencity},
+					Furthermore, when concidering the entropic argument in section \ref{sub:algorithm_analysis} equation \ref{eqn:boltzman}, the number of microstates corespoding to each macrostate $N_\tau$ can be related to equation \ref{eqn:transition_propability_dencity},
 
 					\begin{equation}
-						\Omega_t \sim \frac{n!}{N_{t}!(n-N_{t})!}
+						\Omega_\tau \sim \frac{n!}{N_{\tau}!(n-N_{\tau})!}
 					\end{equation}
 
 					\begin{equation}
-						<N_t>^{Entropic} = MAX[S_t] = MAX[\Omega_t]
+						<N_\tau>^{Entropic} = MAX[S_\tau] = MAX[\Omega_\tau]
 					\end{equation}
 
 					This can be numerically solved,
 
 					\begin{equation}
-						<N_t>^{Entropic}\ = 60
+						<N_\tau>^{Entropic}\ = 60
 						\label{eqn:n_t_entropic}
 					\end{equation}
 
@@ -197,29 +197,29 @@
 					The probability of a chain of length $n$ is,
 
 					\begin{equation}
-						p_n = p_1(1 - p_t)^{n-1}, \quad : \quad n \in \mathbb{N}, \quad n > 1
+						p_n = p_1(1 - p_\tau)^{n-1}, \quad : \quad n \in \mathbb{N}, \quad n > 1
 					\end{equation}
 
 					where $p_1$ is the number of chains of lenght 1. 
-					As $p_1 = N_0 (1 -p_t)$, where $N_0$ is the total number of chains,
+					As $p_1 = N_0 (1 -p_\tau)$, where $N_0$ is the total number of chains,
 
 					\begin{equation}
-						\frac{N_n}{N_0} = (1 - p_t)^n, \quad : \quad n \in \mathbb{N}, \quad n > 1
+						\frac{N_n}{N_0} = (1 - p_\tau)^n, \quad : \quad n \in \mathbb{N}, \quad n > 1
 					\end{equation}
 
 					where $N_n$ in the number of chains of length $n$.
 					Takeing the log of both sides,
 
 					\begin{align}
-						log\left(\frac{N_n}{N_0}\right) &= n\ log(1 - p_t), \nonumber \\
- 						log(N_n) &= n\  log(1 - p_t) + log(N_0).
+						log\left(\frac{N_n}{N_0}\right) &= n\ log(1 - p_\tau), \nonumber \\
+ 						log(N_n) &= n\  log(1 - p_\tau) + log(N_0).
  					\end{align}
 
-					Therefor, for a graph of $log(N_n)$ against $n$ for a large sample of data, the gradient would be $log(1 - p_t)$.
-					In this case, as $p_t = 0.5$, 
+					Therefor, for a graph of $log(N_n)$ against $n$ for a large sample of data, the gradient would be $log(1 - p_\tau)$.
+					In this case, as $p_\tau = 0.5$, 
 
 					\begin{equation}
-						log(1 - p_t) = -0.30\ .
+						log(1 - p_\tau) = -0.30\ .
 						\label{eqn:log_chain_length_gradient}			
 					\end{equation}
 
@@ -303,7 +303,7 @@
 			\end{figure} \FloatBarrier
 			
 			The results from the \textit{`Number of Transitions Per Frame'} analysis, shown in Figure~\ref{fig:transitions_per_frame}, show a strong corelation between the Intermediate and VeloPix Scramblers with the randomly generated data. 
-			These results are withing 1\% agreement with the theoretical predictions for $<N_t> = 60$ and $\sigma_{N_t} = 5.48$, made in Section~\ref{subsub:statistical_predictions}. 
+			These results are withing 1\% agreement with the theoretical predictions for $<N_\tau> = 60$ and $\sigma_{N_\tau} = 5.48$, made in Section~\ref{subsub:statistical_predictions}. 
 			The remarkable consistancy between the theoretical predictions and the randomly gernerated data provides confidance in both the theory, and the scrambled nature of the Intermediate and VeloPix scrambler outputs.
 			\par		
 			 All three scramblers, the random data, and the theoretical predictions are all consistant to within 1\%. 
@@ -331,13 +331,13 @@
 		\begin{table}[h]		
  			\centering		
  			\begin{TAB}(r)[7pt]{l|cc:cc}{c|c:ccc:cc}		
- 							           & $<N_t>$ & $\sigma_{N_t}$ & Gradient  	& $p_t$    \\		
- 				GQT data  		       & 54      & 6.63           & -0.268 		& 0.460 \\		
- 				Additive Scrambler     & 60      & 7.35           & -0.305 		& 0.504 \\		
- 				Intermediate Scrambler & 60      & 5.45           & -0.305 		& 0.504 \\		
- 				Velopix Scrambler      & 60      & 5.46           & -0.305 		& 0.504 \\		
- 				Random Data            & 60      & 5.45           & -0.305 		& 0.504 \\		
- 				Theoretical Prediction & 60      & 5.48           & -0.3    	& 0.5   			
+ 							           & $<N_\tau>$ & $\sigma_{N_\tau}$ & Gradient  	& $p_\tau$    \\		
+ 				GQT data  		       & 54      	& 6.63           	& -0.268 		& 0.460 \\		
+ 				Additive Scrambler     & 60      	& 7.35           	& -0.305 		& 0.504 \\		
+ 				Intermediate Scrambler & 60      	& 5.45           	& -0.305 		& 0.504 \\		
+ 				Velopix Scrambler      & 60      	& 5.46           	& -0.305 		& 0.504 \\		
+ 				Random Data            & 60      	& 5.45           	& -0.305 		& 0.504 \\		
+ 				Theoretical Prediction & 60      	& 5.48           	& -0.3 			& 0.5   			
  			\end{TAB}		
  			\caption{The combined results of the algorithum analysis.}		
  			\label{tab:comb_results}		
@@ -359,9 +359,3 @@
  		The VeloPix Scrambler, like the Intermediate Scrambler, produces a statistically scrambled output.		
  		Furthermore, the algorithum in inline with the additional requirments of the ASIC.		
  		As such, it ideal for implementation, and hense is currently the choice algorithum for use in the 2019 VELO upgrade.
-
-
-
-
-
-
