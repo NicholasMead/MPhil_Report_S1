@@ -2,7 +2,7 @@
 \label{sec:scrambling_algorithms}
 
 	Due to radiation levels inside the detector chamber, the main data processing takes place in a concrete bunker away from the detector.
-	To facilitate this, 20 optical linkes (per modual) are used to transfer the data from the front end VELO to the Data Aquizition FPGA (DAQ).
+	To facilitate this, 20 optical linkes (per modual) are used to transfer the data from the front end VELO to the DAQ FPGA.
 	When comunicating data digitaly, the transfering modual (TX) and the recieving modual (RX) must have syncrinised clocks.
 	In these case, the GWT serialiser is the TX, and the DAQ is the RX.
 	When achieving syncronised clock, there are two main approunches:
@@ -18,10 +18,10 @@
 	The latter, while negating cons of the former, requires data with a high density of tranitions to reduce the likelyhood of a desyncronisation event.
 	Becuase delays in the data are possible, the latter option has been selected.
 
-	A it is nessesary to ensure that the data has large density of transitions before being transmitted from the front-end detector to the DAQ modual.
+	As mentioned, it is nessesary to ensure that the data has large density of transitions before being transmitted from the front-end detector to the DAQ modual.
 	However, as the majority of super pixel hitmaps are empty, the data has a bais towards \textit{`0'}s.
 	This reduces the frequancy of transitions in the data - increasing the probability of a desyncronisation event.
-	It is therefor nesseccary to scramble the data prior to transmition and descramble the data in the DAQ FPGA.
+	It is therefor nesseccary to scramble the data prior to transmition and descramble the data in the LLI of the DAQ FPGA.
 	\par
 	Scrambling and later descrambling the data is not a trivial exercise.
 	The scrambleing (TX) modual and descrambling (RX) modual must use a sycronised \textit{`key'}, that is used in both the scrambling and descrambling processes.
@@ -59,13 +59,13 @@
 	\subsection{Cross Checks} % (fold)
 	\label{sub:cross_checks}
 		The main priority when scrambling data, is ensuring that the data is recoverable.
-		For all three scramblers, the algorithum was synthesised in Quartus\supercite{ref:quartus} and simulated in Modelsim\supercite{ref:modelsim}.
+		For all three scramblers, the algorithum was synthesised in Quartus \cite{ref:quartus} and simulated in Modelsim \cite{ref:modelsim}.
 		The aim of synthesising and simulating the scramblers in these programs was to ensure that the design was both physical in term of on-board logic gates, and to check that the scrambled data was recoverable, respectively.
 		\par
 		Furthermore, a C++ simulation was created for the three scramblers.
 		This simulation had two main purposes:
 		firstly to cross check the output of the C++ against the Modelsim simulations;
-		secondly to simulate the scrambler over a much larger simple of data as Modelsim simulations are less time effecient.
+		secondly to simulate the scrambler over a much larger sample of data as Modelsim simulations are less time effecient.
 		In attition to the cross checks, the C++ code allowed for the injection of a descrnonisation event, in which the \textit{`key'} is lost.
 		As expected, the Additive Scarmbler was unable to recover any data post descrnonisation, however the intermediate and VeloPix scarmblers both recovered the \textit{`key'} after two frames and continioud to recover data.
 
@@ -82,10 +82,10 @@
 		A more mathematically rigorus approuch, however, is to evaluate the system abstractly in the framework of statistical physics.
 		In this abstraction, the 120 bit frame (with the header and parity removed)  is concidered an ensemble; 
 		microstates are the particular form of the frames;
-		and macroscopic quantities can be calculated by averaging a large number of frames (i.e. the desync data).
+		and macroscopic quantities can be calculated by averaging a large number of frames.
 		For the analysis outlined in section \ref{subsub:messurements_of_the_algorithms}, predictions will be made using these principles and outlined in section \ref{subsub:statistical_predictions}.
 		\par
-		In the context of the statisical model, it is reasonable to concider the degree of \textit{`scrambled-ness'} analogous to entropy.	This analogy is not disimular to the common interpritation of entropy as a measure of dissorder.
+		In the context of the statisical model, it is reasonable to concider the degree of \textit{`scrambled-ness'} analogous to entropy.	This analogy is not disimular to the common interpritation of entropy as a measure of dissorder. From Bolzman's equation for entropy,
 
 		\begin{equation}
 			S \sim ln(\Omega)
@@ -171,7 +171,7 @@
 						\sigma_{N_\tau}^{Binomial} = \sqrt{ n\ p_{\tau}^2} = 5.48
 					\end{equation}
 
-					Furthermore, when concidering the entropic argument in section \ref{sub:algorithm_analysis} equation \ref{eqn:boltzman}, the number of microstates corespoding to each macrostate $N_\tau$ can be related to equation \ref{eqn:transition_propability_dencity},
+					Furthermore, when concidering the entropic argument of equation \ref{eqn:boltzman}, the number of microstates corespoding to each macrostate $N_\tau$ can be related to equation \ref{eqn:transition_propability_dencity},
 
 					\begin{equation}
 						\Omega_\tau \sim \frac{n!}{N_{\tau}!(n-N_{\tau})!}
@@ -300,34 +300,34 @@
 				\label{fig:transitions_per_frame}
 			\end{SCfigure}
 
+			The results from the \textit{`Number of Transitions Per Frame'} analysis, shown in Figure~\ref{fig:transitions_per_frame}, show a strong simularity between the Intermediate and VeloPix Scramblers with the randomly generated data. 
+			These results are withing 1\% agreement with the theoretical predictions for $<N_\tau> = 60$ and $\sigma_{N_\tau} = 5.48$, made in Section~\ref{subsub:statistical_predictions}. 
+			The remarkable consistancy between the theoretical predictions and the randomly gernerated data provides confidance in both the theory, and the scrambled nature of the Intermediate and VeloPix scrambler outputs.
+			
 			\begin{SCfigure}%[ht]
 				\centering
 				\includegraphics[width=0.7\textwidth]{Chain_length}
 				\caption{Results of the \textit{`Common Bit Chain Length'} analysis. The results for the Random Data, Additive Scrambler, Intermediate Scrambler and VeloPix Scrambler approximatly overlap for the \textit{`Common Bit Chain Length'} analysis.}
 				\label{fig:chain_length}
 			\end{SCfigure}
-			
+
+			All three scramblers, the random data, and the theoretical predictions are consistant to within 1\%. 
+			Comparing the two results for the Additive Scrambler, however, its shown that while the frequancy of longer chains is consistant with random data - the variance of transitions is larger than predicted, and thus the long and short trains are more localy clustered. 
+
 			\begin{figure}[ht]
 				\centering
 				\includegraphics[width=1\textwidth]{Balance_graph_cropped}
 				\caption{The results of the \textit{`Bit Asymetry'} analysis.}
 				\label{fig:bit_asym}
 			\end{figure}
-
-			The results from the \textit{`Number of Transitions Per Frame'} analysis, shown in Figure~\ref{fig:transitions_per_frame}, show a strong simularity between the Intermediate and VeloPix Scramblers with the randomly generated data. 
-			These results are withing 1\% agreement with the theoretical predictions for $<N_\tau> = 60$ and $\sigma_{N_\tau} = 5.48$, made in Section~\ref{subsub:statistical_predictions}. 
-			The remarkable consistancy between the theoretical predictions and the randomly gernerated data provides confidance in both the theory, and the scrambled nature of the Intermediate and VeloPix scrambler outputs.
-			\par		
-			All three scramblers, the random data, and the theoretical predictions are all consistant to within 1\%. 
-			Comparing the two results for the Additive Scrambler, its shown that while the frequancy of longer chains is consistant with random data; but as the variance of transitions is larger than predicted, the long and short trains are more localy clustered. 
-
+			
 			The \textit{`Bit Asymetry'} of each scrambler, shown in Figure~\ref{fig:bit_asym}, is consistant with the theoretical prediction. 
 			The deviation of $A_{1,0}$ for the predicted mean of 0 is fully consistant with stockastic noise. 
 			The random data also shows consistancy. 
 			This gives confidance in the assumtpions made in Section~\ref{subsub:statistical_predictions}.		
- 			\par		
- 			One notible feature of Figure\ref{fig:bit_asym} is the steap grandient of the additive scrambler a $t \sim 6.10^6$.		
- 			However, as the data stays within the theoretical limits and the \textit{`drop'} is of approximatly $\Delta A_{1,0} \sim 60.10^3$ over the range $n\ \Delta t \sim 1.2.10^8$ it would be difficult to construnct any argument claiming that this feature is of statistically significance.
+ 			% \par		
+ 			% One notible feature of Figure\ref{fig:bit_asym} is the steap grandient of the additive scrambler a $t \sim 6.10^6$.		
+ 			% However, as the data stays within the theoretical limits and the \textit{`drop'} is of approximatly $\Delta A_{1,0} \sim 60.10^3$ over the range $n\ \Delta t \sim 1.2.10^8$ it would be difficult to construnct any argument claiming that this feature is of statistically significance.
 
 	\subsection{Conclusion}
 
@@ -356,9 +356,9 @@
  		\par		
  		The Intermediate Scrambler produced an output consistant with random data. 		
  		This makes the algorithm suitable of data transfer.		
- 		As already mentioned\footnote{Note to Marco: this is in the scrabler options section}, however, the scrambler is designed for computer simulated.		
+ 		As already mentioned, however, the scrambler is designed for computer simulated.		
  		As such, it is not suitable for implementation as it does not meet the additions requirments of the ASIC.		
  		\par		
  		The VeloPix Scrambler, like the Intermediate Scrambler, produces a statistically scrambled output.		
  		Furthermore, the algorithum in inline with the additional requirments of the ASIC.		
- 		As such, it ideal for implementation, and hense is currently the choice algorithum for use in the 2019 VELO upgrade.
+ 		As such, it is ideal for implementation, and hense is currently the choice algorithum for use in the 2019 VELO upgrade.

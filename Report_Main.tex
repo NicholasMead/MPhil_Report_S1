@@ -41,6 +41,7 @@
 \usepackage[thinlines]{easytable}
 \usepackage[font=footnotesize,labelfont=bf]{caption} %figure captions
 \usepackage{sidecap} %side captions
+\sidecaptionvpos{figure}{c}
 
 % ----- Settings ----- %	
 \setlength{\parindent}{0em}
@@ -76,7 +77,7 @@
 
 	\input{Scrambling_Algorithms}
 
-	%\input{Project_Work/Event_Isolation_Flaging}
+	\input{Event_Isolation_Flaging}
 
 	%\input{Overview/Future_Development}
 
@@ -88,5 +89,8 @@
 	\newpage 
 	\addcontentsline{toc}{section}{References}
 	\printbibliography
+
+	\newpage
+	\input{Appendix}
 
 \end{document}
