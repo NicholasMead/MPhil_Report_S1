@@ -92,23 +92,24 @@ steam
 		% subsection data_train_overflowa (end)
 
 	\subsection{Current Stage of Development} 
-
 		The EIF system is still currently in active VHDL development.
 		The current developmently code is still in a stand alone format and not intergrated with the master LLI code.
 		Currently created, and ready for stand alone testing, is a bubble sorting module with data in and out systems.
 		The module consistance of a top level control entity and a comparison/swap sorting entity.
 		The control entity forms a feedback loop passing the ouput of the sorting enity back into its input at each step.
 		At each step, the parity of comparison is changed (i.e. odd-even to even-odd).
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\textwidth]{bubblesort_modual}
+			\caption{Data from for the developmental bubble sorting module.}
+			\label{fig:bubble_data_flow}
+		\end{figure}
 		\par
 		This process continues intill the input and output of the sorting module is identical for two subsequent steps.
 		At this point the data is sorted and passed to the output.
 		The data flow is more simply demonstraited in Figure~\ref{fig:bubble_data_flow}.
-
-		\begin{figure}[h]
-			\centering
-			\caption{Data from for the developmental bubble sorting module.}
-			\label{fig:bubble_data_flow}
-		\end{figure}
-
+		\par
 		Once testing a bug fixing is complete, the EIF will be expanded to include Isolation Flagging and an overflow as discussed.
 		Once the stand alone system is complete, it will be intergrated into the LLI master code and modified to comply with theh LLI data managment systems.
+
+		\FloatBarrier
