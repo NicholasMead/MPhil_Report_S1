@@ -40,7 +40,7 @@
 
 		\begin{description}
 			\item[Additive Scrambler] \hfill \\
-				This scrambler is was originally implemented and used two sets of two-input XOR logic gates.
+				This scrambler was originally implemented and used two sets of two-input XOR logic gates.
 				As the name implies, this scrambler used additive key generation which is dependent on all previous input frames since the last reset signal.
 
 			\item[Intermediate Scrambler] \hfill \\
@@ -67,7 +67,7 @@
 		firstly to cross check the output of the C++ against the Modelsim simulations;
 		secondly to simulate the scrambler over a much larger sample of data as Modelsim simulations are less time effecient.
 		In addition to the cross checks, the C++ code allowed for the injection of a descrnonisation event, in which the \textit{`key'} is lost.
-		As expected, the Additive Scarmbler was unable to recover any data post descrnonisation, however the intermediate and VeloPix scarmblers both recovered the \textit{`key'} after two frames and continued to recover data.
+		As expected, the Additive Scarmbler was unable to recover any data post descrnonisation, however the intermediate and VeloPix scarmblers both recovered the \textit{`key'} after two frames and continued to decode data.
 
 	% subsection cross_checks (end)
 
@@ -75,9 +75,9 @@
 	\label{sub:algorithm_analysis}
 
 		For analytical purposes, it is assumed that fully scrambled data is indistinguisable from randomly generated data. 
-		For this reason, the three algorithms are not only tested against each other and the pre-scrambled QWT data but also randomly generated binary.
+		For this reason, the three algorithms are not only tested against each other and pre-scrambled simulated QWT data but also randomly generated binary.
 		The randomly generated data was created using the Python \textit{`random'} library, selecting a \textit{`0'} or \textit{`1'} with equal probability.
-		While the Python \textit{`random'} library is only sudo-random, on the scale of this example (i.e. $>>$ 100,000 frames), it is sufficient for theses purposes.
+		While the Python \textit{`random'} library is only sudo-random, on the scale of this application (i.e. $>>$ 100,000 frames), it is sufficient for theses purposes.
 		\par
 		A more mathematically rigorus approach, however, is to evaluate the system abstractly in the framework of statistical physics.
 		In this abstraction, the 120 bit frame (with the header and parity removed)  is considered an ensemble; 
@@ -98,7 +98,7 @@
 		For a scramble algorithum to hold for all possible data sets, it must also be capable of outputing all possible permutations. 
 		As such, assuming all possible output are equally likely, the count of each macroscopic output will be proportional to the number of microstates assosiated.
 
-		\subsubsection{Messurements of the Algorithms} 
+		\subsubsection{Measurements of the Algorithms} 
 		\label{subsub:messurements_of_the_algorithms}
 
 			To compare the effecincy of the three algorithums in section \ref{sub:scrambler_options}, the algorithums where run over the same input data and compared for the following measures:
@@ -118,7 +118,7 @@
 					\end{enumerate}
 
 					both with 10 transitions, are considered equally. However, (b) is clearly a more suitable output for data transfer as (a) has a large probability of desynchronisated due to the long chains of \textit{`1'}s in the right most bits.
-					It is therefore also nescssary to evaluate the length of common bit chains within the scrambled data as shorter chains are more suitable for data transfer.
+					It is therefore also necessary to evaluate the length of common bit chains within the scrambled data as shorter chains are more suitable for data transfer.
 
 				\item[Bit Asymetry] \hfill \\
 					Pre-scramble, the data had a large bais towards \textit{`0'}s due to the majority of the hitmaps being empty.
@@ -236,7 +236,7 @@
 					We can consider the evolution of $A_{1,0}$ with frame $t$ of size $n$ as a stochastic itterative map with zero deterministic growth \cite{ref:stockastic_physics},
 
 					\begin{equation}
-						A_{1,0}(nt + n\ \Delta t) = A_{1,0}(nt) + \mathcal{N}(nt)
+						A_{1,0}(nt + n\ \Delta t) = A_{1,0}(nt) + \mathcal{N}(nt).
 					\end{equation}
 
 					Where $\mathcal{N}$ is an independant random variable picked from a gausian distribution. While $A_{1,0}(t) \in \mathbb{Z}$, in the limit of large $nt$ we can approximate that $A_{1,0}$ is continious. 
@@ -296,14 +296,14 @@
 			\begin{SCfigure}%[ht]
 				\centering
 				\includegraphics[width=0.7\textwidth]{Transition_Histogram_update}
-				\caption{Results of the \textit{`Number of Transitions Per Frame'} analysis. The results for the Random Data, Intermediate Scrambler and VeloPix Scrambler overlap for the \textit{`Number of Transitions Per Frame'} analysis.}
+				\caption{Results of the \textit{`Number of Transitions Per Frame'} analysis. The results for the Random Data, Intermediate Scrambler and VeloPix Scrambler overlap.}
 				\label{fig:transitions_per_frame}
 			\end{SCfigure}
 			\par
 			\begin{SCfigure}%[ht]
 				\centering
 				\includegraphics[width=0.7\textwidth]{Chain_length}
-				\caption{Results of the \textit{`Common Bit Chain Length'} analysis. The results for the Random Data, Additive Scrambler, Intermediate Scrambler and VeloPix Scrambler approximatly overlap for the \textit{`Common Bit Chain Length'} analysis.}
+				\caption{Results of the \textit{`Common Bit Chain Length'} analysis. The results for the Random Data, Additive Scrambler, Intermediate Scrambler and VeloPix Scrambler approximatly overlap.}
 				\label{fig:chain_length}
 			\end{SCfigure}
 			\par
@@ -318,8 +318,8 @@
 			These results are withing 1\% agreement with the theoretical predictions for $<N_\tau> = 60$ and $\sigma_{N_\tau} = 5.48$, made in Section~\ref{subsub:statistical_predictions}. 
 			The remarkable consistancy between the theoretical predictions and the randomly gernerated data provides confidance in both the theory, and the scrambled nature of the Intermediate and VeloPix scrambler outputs.
 			
-			All three scramblers; the random data, and the theoretical predictions are consistant to within 1\%. 
-			Comparing the two results for the Additive Scrambler has however shown, that while the frequancy of longer chains is consistant with random data, the variance of transitions is larger than predicted. Thus, the long and short trains are more localy clustered. 
+			for the \textit{`Common Bit Chain Length'} analysis all three scramblers; the random data, and the theoretical predictions are consistant to within 1\%. 
+			Comparing the results for the Additive Scrambler, its shown that while the frequancy of longer chains is consistant with random data, the variance of transitions is larger than predicted. Thus, the long and short trains are more localy clustered. 
 			
 			The \textit{`Bit Asymetry'} of each scrambler, shown in Figure~\ref{fig:bit_asym}, is consistant with the theoretical prediction. 
 			The deviation of $A_{1,0}$ for the predicted mean of 0 is fully consistant with stochastic noise. 
@@ -362,7 +362,6 @@
  		The VeloPix Scrambler, like the Intermediate Scrambler, produces a statistically scrambled output.		
  		Furthermore, the algorithum in inline with the additional requirments of the ASIC.		
  		As such, it is ideal for implementation, and hence is currently the choice algorithm for use in the 2019 VELO upgrade.
-
 
 
 

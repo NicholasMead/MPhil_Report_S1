@@ -1,4 +1,3 @@
-steam
 \section{Event Isolation Flagging}
 	
 	One challange of increasing the readout speed of the detector is prossesing the data that is produced.
@@ -6,7 +5,7 @@ steam
 	One area where the DAQ's FPGA will be used for this purpose is in \underline{E}vent \underline{I}solation \underline{F}lagging (EIF).
 	\par
 	Particles traversing the VELO have a probability that they will pass thought the boundry of two or more Super Pixels.
-	This will cause multiple SPPs for the same particle.
+	This will cause multiple SPPs to be created for the same particle path.
 	As such, the reconstruction of the particles path is a more complicated process than a particle path that only interects with one SP.
 	\par
 	The aim of EIF is to identify the SPPs that completly describe the paticles interaction with the modual and flag then event as isolated.
@@ -25,16 +24,22 @@ steam
 
 		\begin{easylist}
 			& Read in SPP and retrieve BCID.
-			& Add SPP to correct list according to BCID.
-			& Print list of opposite BCID (i.e. input SPP's BCID + 124 accounting for BCID 256 rolling over to 0) to file.
+			& Add the SPP to the correct list according to BCID.
+			& Print the list of opposite BCID (i.e. input SPP's BCID + 124, accounting for BCID 256 rolling over to 0) to file.
 		\end{easylist}
 
 		As not all BCID's were present, measures were put in place to ensure all BCID lists where outputed in time order, preventing lists containing SPPs from two or more bunch crosses. The time order of the data was tested and confirmed as correct.
-		\par
-		One advantage of this process is that, regardless of the number of isolated events, the data no longer needs to be sorted by the computer network.
-		This further reduced the computational load on the computers.
+		% \par
+		% One advantage of this process is that, regardless of the number of isolated events, the data no longer needs to be sorted by the computer network.
+		% This further reduced the computational load on the computers.
 
 		\subsection{Bubble Sorting}
+
+		Bubble sorting is the process of sequentially comparing adjesent elements of a list and swapping the element if necessary.
+		for example, if sorting into accending order and comparing the value 5 and 3, a swap would be needed.
+		However, if comparing 3 and 5 in the same example would not need a swap.
+		When sorting an arbitrary list, we can define an `even-odd' comparison as one comparing a even placed element with an odd one (i.e. element 4 with element 5).
+		An `odd-even' comparison is the logic opposite (i.e. element 5 with element 6).
 
 		The first step in EIF is to sort all the SPP's that correspond to the same bunch crossing (Hereforth refered to as a \textit{`data trian'}) by their row in the ASIC.
 		\par
@@ -45,7 +50,7 @@ steam
 
 		\begin{figure}[ht]
 			\centering
-			\includegraphics[width=\textwidth]{sorting_diagram}
+			\includegraphics[width=0.7\textwidth]{sorting_diagram}
 			\caption{A diagram showing Bubble Sorting in an FPGA.}
 			\label{fig:sorting}
 		\end{figure}
@@ -75,20 +80,30 @@ steam
 		\par
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=\textwidth]{overflow_graph.pdf}
+			\includegraphics[width=0.7\textwidth]{overflow_graph.pdf}
 			\caption{fraction of overflow data trains for four overflow limits.}
 			\label{fig:overflow_franction}
-		\end{figure}
+		\end{figure}\FloatBarrier
 		More important, however, is the faction of data trains over the bypass limit.
 		For four hypothetical limits, the fraction of overflow datatrains was calculated from the VELO simulated data, and it shown in Figure~\ref{fig:overflow_franction}.
 		This analysis, however, raises questions beyond that of the overflow limit.
 		The ASIC's below 100 show no simulatity to those above 100.
-		\par
-		Further investigations as the to structure of the simulated data is shown in Appendix~\ref{app:event_isolation_flagging}.
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.49\textwidth]{Mean_ASIC_Graph_Chip}
+			\includegraphics[width=0.49\textwidth]{Mean_ASIC_Graph_Chip_lower_values}
+			\caption{The mean data train length for each ASIC, coloured by the chip number.}
+			\label{fig:asic_structure}
+		\end{figure}\FloatBarrier
+		Further investigations as the to structure of the simulated data is shown in Figure~\ref{fig:asic_structure}.
+		Here the data is partitioned by the position of the ASIC chip in the modual.
 		From this we learn that large variance in the data (ASIC number $>$ 100) is due to the ASIC's position on the modual.
 		This result is expected as the ASICs closses to the beam line will detect more particle paths.
-		This structure is not consistant across the ACIS's pre and post 100.
-		It can be concuded that the simulated data contains a \textit{`bug'} and it now being reviewed by the creators of the simulation. No further analysis can be continued on this front until this \textit{`bug'} has been properly investigated.
+		However, this structure is not consistant across the ACIS's pre and post 100.
+		It can be concuded that the simulated data contains a \textit{`bug'}.
+		This \textit{`bug'} is now being reviewed by the creators of the simulation. 
+		No further analysis can be continued on setting an overflow limit until this \textit{`bug'} has been properly investigated.
 
 		% subsection data_train_overflowa (end)
 
@@ -101,10 +116,10 @@ steam
 		At each step, the parity of comparison is changed (i.e. odd-even to even-odd).
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.75\textwidth]{bubblesort_modual}
+			\includegraphics[width=0.65\textwidth]{bubblesort_modual}
 			\caption{Data from for the developmental bubble sorting module.}
 			\label{fig:bubble_data_flow}
-		\end{figure}
+		\end{figure} \FloatBarrier
 		\par
 		This process continues until the input and output of the sorting module is identical for two subsequent steps.
 		At this point the data is sorted and passed to the output.
@@ -112,5 +127,4 @@ steam
 		\par
 		Once testing of the bubble sorting is complete and the simulated data bug is fixed, the EIF will be expanded to include Isolation Flagging and an overflow as discussed.
 		Once the stand alone system is complete, it will be intergrated into the LLI master code and modified to comply with the LLI data managment systems.
-
 		\FloatBarrier
